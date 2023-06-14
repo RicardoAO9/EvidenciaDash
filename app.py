@@ -233,7 +233,27 @@ jumbotron_ent = dbc.Row(
 
 ############################################# PROYECCIONES ##############################################
 
+jumbotron_pro = html.Div(
+    dbc.Container([
+            html.H1("Proyecciones", className="display-3", style={'textAlign':'center','color':'#000080'}),
+            html.P(
+                "Modelos de regresion lineales creados con los datos de series de tiempo de la base "
+                "de datos de Ors_entidad.", className="lead", style={'textAlign':'center'})
+        ],fluid=True, className="py-3",),
+    className="p-3 bg-light rounded-3",
+)
 
+predpri = dbc.Col(html.Div([html.Img(src=app.get_asset_url('predpri.png'))],),md=6,)
+predpri2 = dbc.Col(html.Div([html.Img(src=app.get_asset_url('predpri2.png'))],),md=6,)
+prima=dbc.Row([predpri,predpri2])
+
+predsin = dbc.Col(html.Div([html.Img(src=app.get_asset_url('predsin.png'))],),md=6,)
+predsin2 = dbc.Col(html.Div([html.Img(src=app.get_asset_url('predsin2.png'))],),md=6,)
+siniestralidad=dbc.Row([predsin,predsin2])
+
+predcom = dbc.Col(html.Div([html.Img(src=app.get_asset_url('predcom.png'))],),md=6,)
+predcom2 = dbc.Col(html.Div([html.Img(src=app.get_asset_url('predcom2.png'))],),md=6,)
+comision=dbc.Row([predcom,predcom2])
 
 ################################################# APP ###################################################
 
@@ -245,7 +265,7 @@ app.layout = html.Div([
         dbc.NavItem(dbc.NavLink("Emision", href="#emision", active=True, external_link=True, style={'background':'#80120D'})),
         dbc.NavItem(dbc.NavLink("Comisiones", href="#comisiones", active=True, external_link=True, style={'background':'#000080'})),
         dbc.NavItem(dbc.NavLink("Entidades", href="#entidades", active=True, external_link=True, style={'background':'#80120D'})),
-        dbc.NavItem(dbc.NavLink("Proyecciones", href="#", active=True, external_link=True, style={'background':'#000080'})),                
+        dbc.NavItem(dbc.NavLink("Proyecciones", href="#proyecciones", active=True, external_link=True, style={'background':'#000080'})),                
     ],pills=True, justified=True, class_name="mx-2"),
 
     html.Hr(id="siniestros",className="ty-3"),
@@ -274,7 +294,16 @@ app.layout = html.Div([
     dcc.Dropdown(unent, 'PRIMA EMITIDA', id='drop2'),
     dcc.Graph(id="lin1"),
 
-],style={'color':'#34495E','font-family':'Helvetica','marginBottom': 50, 'marginTop': 25, 'marginLeft': 25, 'marginRight': 25})
+    html.Hr(id="proyecciones",className="my-4"),
+    jumbotron_pro,
+    html.H3("Predicciones de la Prima Emitida", style={'textAlign':'center'}, className="my-4"),
+    prima,
+    html.H3("Predicciones de la Monto de Siniestralidad", style={'textAlign':'center'}, className="my-4"),
+    siniestralidad,
+    html.H3("Predicciones de la Comision Directa", style={'textAlign':'center'}, className="my-4"),
+    comision,
+
+],style={'color':'#000000','font-family':'Helvetica','marginBottom': 50, 'marginTop': 25, 'marginLeft': 25, 'marginRight': 25})
 
 if __name__ == '__main__':
     app.run_server()
